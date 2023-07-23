@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val component=DaggerUserRegistrationComponent.builder().build()
+        val component=DaggerUserRegistrationComponent.builder()
+            .notificationServiceModule(NotificationServiceModule(3))
+            .build()
         component.inject(this)
         userRegistrationService.registerUser("yuvraj@gmail.com","12345678")
     }

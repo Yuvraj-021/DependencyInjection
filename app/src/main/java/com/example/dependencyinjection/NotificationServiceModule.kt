@@ -7,14 +7,14 @@ import javax.inject.Named
 
 
 @Module
-class NotificationServiceModule {
+class NotificationServiceModule (private val retryCount: Int){
 
     // Provides :   Provides firebase repo to the user repository. can used in the case where @inject is not used.
 
     @MessageQualifier
     @Provides
     fun getMessageService():NotificationService{
-        return MessageService()
+        return MessageService(retryCount)
     }
 
     @Named("Email")

@@ -14,8 +14,8 @@ class EmailService @Inject constructor() :NotificationService{
     }
 }
 
-class MessageService : NotificationService{
+class MessageService(private val retryCount :Int) : NotificationService{
     override fun send(to: String, from: String, message: String) {
-        Log.i("User","Message Sent")
+        Log.i("User","Message Sent - Retry count $retryCount")
     }
 }
