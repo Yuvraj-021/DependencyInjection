@@ -3,21 +3,29 @@ package com.example.dependencyinjection
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 
 @Module
-abstract class NotificationServiceModule {
+class NotificationServiceModule {
 
     // Provides :   Provides firebase repo to the user repository. can used in the case where @inject is not used.
 
-//    @Provides
-//    fun getMessageService():NotificationService{
-//        return MessageService()
-//    }
+    @MessageQualifier
+    @Provides
+    fun getMessageService():NotificationService{
+        return MessageService()
+    }
+
+    @Named("Email")
+    @Provides
+    fun getEmailService(emailService: EmailService):NotificationService{
+        return emailService
+    }
 
     // Binds: User Repository is binded to the sqlRepository. sqlrepository object is automatically created by using @inject
-//
-    @Binds
-    abstract fun getEmailService(emailService: EmailService):NotificationService
+
+//    @Binds
+//    abstract fun getEmailService(emailService: EmailService):NotificationService
 
 }
